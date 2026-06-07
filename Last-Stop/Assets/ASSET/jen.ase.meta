@@ -194,8 +194,8 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 131
-      y: 267
+      x: 231
+      y: 256
       width: 62
       height: 45
     spriteID: 16f50d05c6bece44f95a6270ea98b08e
