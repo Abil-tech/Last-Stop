@@ -1533,12 +1533,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a45570a3bee3284897b6c3055087730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentFloor: 0
   escapeFloorTarget: 8
   anomalyChance: 0.5
-  isAnomalyActive: 0
-  normalHallwayAssets: {fileID: 2089943265}
-  anomalyVariants: []
+  normalHallwayAssets: {fileID: 402763346}
+  anomalyVariants:
+  - {fileID: 2089943265}
 --- !u!4 &810901434
 Transform:
   m_ObjectHideFlags: 0
@@ -4370,5 +4369,5 @@ SceneRoots:
   - {fileID: 1130933011}
   - {fileID: 944268724}
   - {fileID: 810901434}
-  - {fileID: 402763347}
   - {fileID: 2089943266}
+  - {fileID: 402763347}

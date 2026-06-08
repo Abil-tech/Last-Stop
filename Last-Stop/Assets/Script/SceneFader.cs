@@ -42,31 +42,27 @@ public class SceneFader : MonoBehaviour
             yield return null;
         }
 
-        // Process the Exit 8 logic rules here!
-        if (AnomalyManager.Instance != null)
+        // Find the active anomaly manager component in the current scene layout
+        AnomalyManager manager = FindFirstObjectByType<AnomalyManager>();
+        if (manager != null)
         {
             bool choseRight = DoorInteraction.lastChoseRightDoor;
-            bool anomalyPresent = AnomalyManager.Instance.isAnomalyActive;
+            bool anomalyPresent = AnomalyManager.isAnomalyActive;
 
-            // WIN CONDITION MATRIX:
-            // 1. Chose Right Door AND No Anomaly Present -> CORRECT
-            // 2. Chose Left Door AND Anomaly IS Present -> CORRECT
+            // WIN CONDITION MATRIX
             if ((choseRight && !anomalyPresent) || (!choseRight && anomalyPresent))
             {
                 Debug.Log("[System] Choice Validated: Correct path taken!");
-                AnomalyManager.Instance.AdvanceFloor();
+                manager.AdvanceFloor();
             }
             else
             {
                 Debug.Log("[System] Choice Validated: WRONG path taken!");
-                AnomalyManager.Instance.ResetToBeginning();
+                manager.ResetToBeginning();
             }
-
-            // Reroll the level environment data layout
-            AnomalyManager.Instance.GenerateLevelState();
         }
 
-        // Reload the current level index loop
+        // Reload the scene. The fresh manager's Start() will run the new randomization seamlessly!
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
