@@ -9,6 +9,7 @@ public class UIscript : MonoBehaviour
     public GameObject PauseMenu;
     public GameObject play;
     public GameObject Quit;
+    public GameObject NamaGame;
     public GameObject SettingButton;
 
     //MainMenu
@@ -26,6 +27,7 @@ public class UIscript : MonoBehaviour
         play.SetActive(false);
         Quit.SetActive(false);
         SettingButton.SetActive(false);
+        NamaGame.SetActive(false);
     }
     public void SettingExit()
     {
@@ -33,6 +35,7 @@ public class UIscript : MonoBehaviour
         play.SetActive(true);
         Quit.SetActive(true);
         SettingButton.SetActive(true);
+        NamaGame.SetActive(true);
     }
     //
 
