@@ -9,24 +9,30 @@ public class SceneFader : MonoBehaviour
     public Image fadeImage;
     public float fadeSpeed = 1f;
 
-    [Header("Dopamine & Damage (UI/Audio)")]
+    [Header("UI Feedback")]
     public Text feedbackText;          // Drag your Canvas UI Text component here
-    public AudioSource audioSource;    // Drag your AudioSource component here
-    public AudioClip correctSound;     // SFX for making the right choice
-    public AudioClip wrongSound;       // SFX for getting completely jiped
-    public float resultDisplayTime = 1.5f; // How many seconds to wait in pitch black
 
+    [Header("Audio Configurations")]
+    public AudioSource audioSource;    // Drag your AudioSource component here
+    public AudioClip correctSound;     // Drag your "Ding/Success" SFX here
+    public AudioClip wrongSound;       // Drag your "Buzzer/JumpScare" SFX here
+    public float resultDisplayTime = 1.5f; // How long to stay in black before reloading
+
+    // --- DECLARATION CONTEXT EXAMPLE ---
+    // This boolean acts as an input lock state variable.
+    // It prevents chaotic button spamming from running parallel coroutines.
     private bool isFading = false; 
 
     void Start()
     {
-        // Clear out any old text when a fresh loop boots up
+        // Clear out any stale text values when a fresh loop boots up
         if (feedbackText != null) feedbackText.text = "";
         StartCoroutine(FadeIn());
     }
 
     public void FadeToNextScene()
     {
+        // Reject any extra spam clicks if we are already transitioning
         if (isFading) return; 
         
         StartCoroutine(FadeOut());
@@ -46,9 +52,10 @@ public class SceneFader : MonoBehaviour
 
     IEnumerator FadeOut()
     {
+        // Slam the door shut on any incoming multi-click attempts
         isFading = true; 
 
-        // STEP 1: Fade to absolute pitch black first
+        // Smoothly drop the curtain to total pitch black darkness
         float t = 0f;
         while (t < 1f)
         {
@@ -58,27 +65,26 @@ public class SceneFader : MonoBehaviour
             yield return null;
         }
 
-        // STEP 2: Find the Anomaly Manager to validate the player's choices
-        AnomalyManager manager = Object.FindFirstObjectByType<AnomalyManager>(); 
+        // Search the active scene hierarchy to discover the current AnomalyManager instance
+        AnomalyManager manager = Object.FindFirstObjectByType<AnomalyManager>();
 
         if (manager != null)
         {
             bool choseRight = DoorInteraction.lastChoseRightDoor;
             bool anomalyPresent = AnomalyManager.isAnomalyActive; 
 
-            // --- DECLARATION CONTEXT EXAMPLE ---
-            // We declare local variables to temporarily store our dynamic assets 
-            // before committing them to the UI and Audio elements.
-            string dynamicMessage = "";
+            // Temporary placeholders to queue up our feedback data
+            string displayMessage = "";
             AudioClip clipToPlay = null;
 
+            // Exit 8 Core Logic Rules Matrix
             if ((choseRight && !anomalyPresent) || (!choseRight && anomalyPresent))
             {
                 Debug.Log("[System] Choice Validated: Correct path taken!");
                 manager.AdvanceFloor();
                 
-                // Show their updated progression status (e.g., "FLOOR 3")
-                dynamicMessage = $"FLOOR {AnomalyManager.currentFloor}";
+                // Track the new progression value dynamically
+                displayMessage = $"FLOOR {AnomalyManager.currentFloor}";
                 clipToPlay = correctSound;
             }
             else
@@ -86,30 +92,26 @@ public class SceneFader : MonoBehaviour
                 Debug.Log("[System] Choice Validated: WRONG path taken!");
                 manager.ResetToBeginning();
                 
-                // Humiliate them with a hard reset to zero
-                dynamicMessage = "FLOOR 0";
+                displayMessage = "FLOOR 0";
                 clipToPlay = wrongSound;
             }
 
-            // STEP 3: Assign the text data and fire off the audio blast
-            if (feedbackText != null) feedbackText.text = dynamicMessage;
+            // Commit changes to UI and blast the audio clip
+            if (feedbackText != null) feedbackText.text = displayMessage;
             if (audioSource != null && clipToPlay != null)
             {
                 audioSource.PlayOneShot(clipToPlay);
             }
 
-            // STEP 4: Pause execution briefly so the audio finishes playing and text can be read
+            // Freeze the void momentarily so the user can process their choices and hear the sound fully
             yield return new WaitForSeconds(resultDisplayTime);
-
-            // Re-roll the corridor assets right before the new scene opens
-            manager.GenerateLevelState();
         }
         else
         {
-            Debug.LogError("[System Error] SceneFader couldn't find the AnomalyManager in this scene layout!");
+            Debug.LogError("[System Error] SceneFader couldn't locate the AnomalyManager script in this scene!");
         }
 
-        // STEP 5: Reload scene layout
+        // Wipe the scene layout clean and reload it fresh
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
