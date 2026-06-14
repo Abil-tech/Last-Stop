@@ -9,38 +9,24 @@ public class SceneFader : MonoBehaviour
     public Image fadeImage;
     public float fadeSpeed = 1f;
 
-    [Header("UI Feedback")]
+    [Header("Dopamine & Damage (UI/Audio)")]
     public Text feedbackText;          // Drag your Canvas UI Text component here
-
-    [Header("Audio Configurations")]
     public AudioSource audioSource;    // Drag your AudioSource component here
-    public AudioClip correctSound;     // Drag your "Ding/Success" SFX here
-    public AudioClip wrongSound;       // Drag your "Buzzer/JumpScare" SFX here
-    public float resultDisplayTime = 1.5f; // How long to stay in black before reloading
+    public AudioClip correctSound;     // SFX for making the right choice
+    public AudioClip wrongSound;       // SFX for getting completely jiped
+    public float resultDisplayTime = 1.5f; // How many seconds to wait in pitch black
 
-    [Header("Game Progression")]
-    public int targetFloor = 8;
-    public string victorySceneName = "EndingScene";
-
-    [Header("Victory Transition")]
-    public AudioClip victorySound;
-    public float victoryDelay = 2f;
-
-    // --- DECLARATION CONTEXT EXAMPLE ---
-    // This boolean acts as an input lock state variable.
-    // It prevents chaotic button spamming from running parallel coroutines.
     private bool isFading = false; 
 
     void Start()
     {
-        // Clear out any stale text values when a fresh loop boots up
+        // Clear out any old text when a fresh loop boots up
         if (feedbackText != null) feedbackText.text = "";
         StartCoroutine(FadeIn());
     }
 
     public void FadeToNextScene()
     {
-        // Reject any extra spam clicks if we are already transitioning
         if (isFading) return; 
         
         StartCoroutine(FadeOut());
@@ -60,10 +46,9 @@ public class SceneFader : MonoBehaviour
 
     IEnumerator FadeOut()
     {
-        // Slam the door shut on any incoming multi-click attempts
         isFading = true; 
 
-        // Smoothly drop the curtain to total pitch black darkness
+        // STEP 1: Fade to absolute pitch black first
         float t = 0f;
         while (t < 1f)
         {
@@ -73,26 +58,27 @@ public class SceneFader : MonoBehaviour
             yield return null;
         }
 
-        // Search the active scene hierarchy to discover the current AnomalyManager instance
-        AnomalyManager manager = Object.FindFirstObjectByType<AnomalyManager>();
+        // STEP 2: Find the Anomaly Manager to validate the player's choices
+        AnomalyManager manager = Object.FindFirstObjectByType<AnomalyManager>(); 
 
         if (manager != null)
         {
             bool choseRight = DoorInteraction.lastChoseRightDoor;
             bool anomalyPresent = AnomalyManager.isAnomalyActive; 
 
-            // Temporary placeholders to queue up our feedback data
-            string displayMessage = "";
+            // --- DECLARATION CONTEXT EXAMPLE ---
+            // We declare local variables to temporarily store our dynamic assets 
+            // before committing them to the UI and Audio elements.
+            string dynamicMessage = "";
             AudioClip clipToPlay = null;
 
-            // Exit 8 Core Logic Rules Matrix
             if ((choseRight && !anomalyPresent) || (!choseRight && anomalyPresent))
             {
                 Debug.Log("[System] Choice Validated: Correct path taken!");
                 manager.AdvanceFloor();
                 
-                // Track the new progression value dynamically
-                displayMessage = $"FLOOR {AnomalyManager.currentFloor}";
+                // Show their updated progression status (e.g., "FLOOR 3")
+                dynamicMessage = $"FLOOR {AnomalyManager.currentFloor}";
                 clipToPlay = correctSound;
             }
             else
@@ -100,68 +86,30 @@ public class SceneFader : MonoBehaviour
                 Debug.Log("[System] Choice Validated: WRONG path taken!");
                 manager.ResetToBeginning();
                 
-                displayMessage = "FLOOR 0";
+                // Humiliate them with a hard reset to zero
+                dynamicMessage = "FLOOR 0";
                 clipToPlay = wrongSound;
             }
 
-            // Commit changes to UI and blast the audio clip
-            if (feedbackText != null) feedbackText.text = displayMessage;
+            // STEP 3: Assign the text data and fire off the audio blast
+            if (feedbackText != null) feedbackText.text = dynamicMessage;
             if (audioSource != null && clipToPlay != null)
             {
                 audioSource.PlayOneShot(clipToPlay);
             }
 
+            // STEP 4: Pause execution briefly so the audio finishes playing and text can be read
             yield return new WaitForSeconds(resultDisplayTime);
 
-            if (AnomalyManager.currentFloor >= targetFloor)
-{
-    StartCoroutine(VictoryTransition());
-    yield break;
-}
-else
-{
-    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-}
+            // Re-roll the corridor assets right before the new scene opens
+            manager.GenerateLevelState();
         }
         else
         {
-            Debug.LogError("[System Error] SceneFader couldn't locate the AnomalyManager script in this scene!");
+            Debug.LogError("[System Error] SceneFader couldn't find the AnomalyManager in this scene layout!");
         }
 
-        // Wipe the scene layout clean and reload it fresh
+        // STEP 5: Reload scene layout
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
-    IEnumerator WhiteFadeOut()
-{
-    isFading = true;
-
-    float t = 0f;
-
-    while (t < 1f)
-    {
-        t += Time.deltaTime * fadeSpeed;
-
-        if (fadeImage != null)
-        {
-            fadeImage.color = new Color(1f, 1f, 1f, t);
-        }
-
-        yield return null;
-    }
-}
-
-IEnumerator VictoryTransition()
-{
-    yield return StartCoroutine(WhiteFadeOut());
-
-    if (audioSource != null && victorySound != null)
-    {
-        audioSource.PlayOneShot(victorySound);
-    }
-
-    yield return new WaitForSeconds(victoryDelay);
-
-    SceneManager.LoadScene(victorySceneName);
-}
 }

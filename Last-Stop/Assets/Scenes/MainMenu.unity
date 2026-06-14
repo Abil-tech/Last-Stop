@@ -147,16 +147,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  m_Resource: {fileID: 8300000, guid: 2c142099d917cb34abe9aa22884d4172, type: 3}
-  m_PlayOnAwake: 0
-=======
->>>>>>> Stashed changes
   m_Resource: {fileID: 8300000, guid: 82f2e3a6bb84f034ab33ac56b6fd4859, type: 3}
   m_PlayOnAwake: 1
->>>>>>> 769222dce225e11f71789402125344ea96170e0a
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -829,17 +821,7 @@ MonoBehaviour:
   Quit: {fileID: 1773217397}
   NamaGame: {fileID: 1908817606}
   SettingButton: {fileID: 1936335497}
-<<<<<<< Updated upstream
 --- !u!1 &832577309
-=======
-<<<<<<< HEAD
-  audioSource: {fileID: 88095979}
-  clickSound: {fileID: 8300000, guid: 2c142099d917cb34abe9aa22884d4172, type: 3}
---- !u!1 &885227650
-=======
---- !u!1 &832577309
->>>>>>> 769222dce225e11f71789402125344ea96170e0a
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1875,8 +1857,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -5, y: 86}
-  m_SizeDelta: {x: -486.26, y: -196.4839}
+  m_AnchoredPosition: {x: -12, y: 97.79}
+  m_SizeDelta: {x: -554.2383, y: -267.9783}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1908817608
 MonoBehaviour:
