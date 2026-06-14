@@ -8,6 +8,15 @@ public class PlayerMovement : MonoBehaviour
     private Camera mainCamera;
     private float objectWidth;
 
+    // --- DECLARATION CONTEXT EXAMPLE ---
+    // We declare an AudioSource specific to the player, along with step cadence variables
+    // to prevent the audio from overlapping and sounding completely cooked.
+    [Header("Audio Settings")]
+    public AudioSource footstepSource; 
+    public AudioClip footstepClip;     
+    public float stepInterval = 0.4f;   // Lower = faster steps (running), Higher = slower steps
+    private float stepTimer;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,6 +40,31 @@ public class PlayerMovement : MonoBehaviour
             else
                 moveInput = -1f;
         }
+
+        // Handle footstep cadence timing logic
+        HandleFootsteps();
+    }
+
+    void HandleFootsteps()
+    {
+        // Only tick down the timer if the player is actively moving left or right
+        if (Mathf.Abs(moveInput) > 0.1f)
+        {
+            stepTimer -= Time.deltaTime;
+            if (stepTimer <= 0f)
+            {
+                if (footstepSource != null && footstepClip != null)
+                {
+                    footstepSource.PlayOneShot(footstepClip);
+                }
+                stepTimer = stepInterval; // Reset the cadence window
+            }
+        }
+        else
+        {
+            // Reset the timer so footsteps play instantly the microsecond they start walking again
+            stepTimer = 0f; 
+        }
     }
 
     void FixedUpdate()
@@ -42,6 +76,6 @@ public class PlayerMovement : MonoBehaviour
         float maxX = screenBounds.x - objectWidth;
 
         float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
-        transform.position = new Vector2(clampedX, transform.position.y);
+        transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
     }
 }
