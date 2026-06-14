@@ -18,6 +18,14 @@ public class SceneFader : MonoBehaviour
     public AudioClip wrongSound;       // Drag your "Buzzer/JumpScare" SFX here
     public float resultDisplayTime = 1.5f; // How long to stay in black before reloading
 
+    [Header("Game Progression")]
+    public int targetFloor = 8;
+    public string victorySceneName = "EndingScene";
+
+    [Header("Victory Transition")]
+    public AudioClip victorySound;
+    public float victoryDelay = 2f;
+
     // --- DECLARATION CONTEXT EXAMPLE ---
     // This boolean acts as an input lock state variable.
     // It prevents chaotic button spamming from running parallel coroutines.
@@ -103,8 +111,17 @@ public class SceneFader : MonoBehaviour
                 audioSource.PlayOneShot(clipToPlay);
             }
 
-            // Freeze the void momentarily so the user can process their choices and hear the sound fully
             yield return new WaitForSeconds(resultDisplayTime);
+
+            if (AnomalyManager.currentFloor >= targetFloor)
+{
+    StartCoroutine(VictoryTransition());
+    yield break;
+}
+else
+{
+    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+}
         }
         else
         {
@@ -114,4 +131,37 @@ public class SceneFader : MonoBehaviour
         // Wipe the scene layout clean and reload it fresh
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    IEnumerator WhiteFadeOut()
+{
+    isFading = true;
+
+    float t = 0f;
+
+    while (t < 1f)
+    {
+        t += Time.deltaTime * fadeSpeed;
+
+        if (fadeImage != null)
+        {
+            fadeImage.color = new Color(1f, 1f, 1f, t);
+        }
+
+        yield return null;
+    }
+}
+
+IEnumerator VictoryTransition()
+{
+    yield return StartCoroutine(WhiteFadeOut());
+
+    if (audioSource != null && victorySound != null)
+    {
+        audioSource.PlayOneShot(victorySound);
+    }
+
+    yield return new WaitForSeconds(victoryDelay);
+
+    SceneManager.LoadScene(victorySceneName);
+}
 }

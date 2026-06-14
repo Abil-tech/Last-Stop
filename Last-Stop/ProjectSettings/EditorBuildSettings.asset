@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main-Menu.unity
     guid: fce5f6cf48b5f164f85204d28d6c85cd
   - enabled: 1
+    path: Assets/Scenes/cut-scene.unity
+    guid: b9b6a7750b014f74891b366bc4d48046
+  - enabled: 1
     path: Assets/Scenes/lingga-femboy.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   m_configObjects:
