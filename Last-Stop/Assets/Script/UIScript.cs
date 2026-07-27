@@ -29,7 +29,7 @@ public class UIscript : MonoBehaviour
     public void Play()
     {
         PlayClickSound(); // Memanggil suara sebelum pindah scene
-        SceneManager.LoadScene("lingga-femboy");
+        SceneManager.LoadScene("cutscene");
     }
 
     public void QuitFunction()
