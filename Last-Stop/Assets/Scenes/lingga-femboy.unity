@@ -1033,7 +1033,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1560381038044323035, guid: d6768e8bd5ea32b4f92b32caaa7c38ca, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.745283, g: 0.41131186, b: 0.41131186, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1885,7 +1885,7 @@ Transform:
   m_GameObject: {fileID: 643435770}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.95, y: -4.76, z: -3.611418}
+  m_LocalPosition: {x: 1.96, y: -5.08, z: -3.611418}
   m_LocalScale: {x: -5.8386, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2373,7 +2373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   escapeFloorTarget: 8
-  anomalyChance: 0.5
+  anomalyChance: 0.7
   normalHallwayAssets: {fileID: 402763346}
   anomalyVariants:
   - {fileID: 848849192}
@@ -2383,8 +2383,9 @@ MonoBehaviour:
   - {fileID: 1012977553}
   - {fileID: 691197270}
   - {fileID: 1549559716}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2120287575}
+  - {fileID: 1212473041}
+  - {fileID: 819220358}
 --- !u!4 &810901434
 Transform:
   m_ObjectHideFlags: 0
@@ -2557,13 +2558,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819220358}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.6580095, y: 1.3927176, z: -0.045016047}
-  m_LocalScale: {x: -1.11175, y: -0.88209, z: 1.16}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -2.74, y: 0.67, z: -0.045016047}
+  m_LocalScale: {x: -1.5732374, y: -1.1796188, z: 1.16}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2089943266}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &819220360
 SpriteRenderer:
   serializedVersion: 3
@@ -2951,12 +2952,12 @@ Transform:
   - {fileID: 1762964499}
   - {fileID: 1721362001}
   - {fileID: 1079825603}
+  - {fileID: 1935029044}
   - {fileID: 402729116}
   - {fileID: 77822634}
   - {fileID: 1210960337}
   - {fileID: 2073322020}
   - {fileID: 4345405}
-  - {fileID: 1935029044}
   - {fileID: 2049761458}
   - {fileID: 1914145152}
   m_Father: {fileID: 0}
@@ -3398,7 +3399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -286.8723, y: -19.4103}
+  m_AnchoredPosition: {x: -351, y: -231.6}
   m_SizeDelta: {x: 314.0561, y: 96.2305}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1101614328
@@ -3875,7 +3876,7 @@ Transform:
   m_GameObject: {fileID: 1212473041}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.975659, y: 1.3927176, z: -0.045016047}
+  m_LocalPosition: {x: -13.64, y: 1.41, z: -0.045016047}
   m_LocalScale: {x: -1.11175, y: -0.88209, z: 1.16}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4692,7 +4693,7 @@ GameObject:
   - component: {fileID: 1842428623}
   - component: {fileID: 1842428624}
   m_Layer: 0
-  m_Name: Pintu-terbuka (1)
+  m_Name: Pintu-anomaly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4707,7 +4708,7 @@ Transform:
   m_GameObject: {fileID: 1842428622}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.9, y: 5.52, z: -3.4851208}
+  m_LocalPosition: {x: -16.87035, y: 5.5200005, z: -3.485121}
   m_LocalScale: {x: 5.809478, y: -6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4763,7 +4764,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -7975944817443633178, guid: d6768e8bd5ea32b4f92b32caaa7c38ca, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.36320752, b: 0.36320752, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4876,7 +4877,7 @@ GameObject:
   - component: {fileID: 1935029044}
   - component: {fileID: 1935029045}
   m_Layer: 0
-  m_Name: Pintu-terbuka (2)
+  m_Name: Pintu-Normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4891,8 +4892,8 @@ Transform:
   m_GameObject: {fileID: 1935029043}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.521, y: -0.243, z: -0.5931215}
-  m_LocalScale: {x: 0.9829912, y: 0.8, z: 1.0344827}
+  m_LocalPosition: {x: -1.5209999, y: -0.24300002, z: -0.5931215}
+  m_LocalScale: {x: 0.9829912, y: 0.8000001, z: 1.0344827}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 902389731}
@@ -5176,6 +5177,8 @@ MonoBehaviour:
   Quit: {fileID: 0}
   NamaGame: {fileID: 0}
   SettingButton: {fileID: 0}
+  gameSceneName: lingga-fem
+  continueButton: {fileID: 0}
   audioSource: {fileID: 0}
   clickSound: {fileID: 0}
 --- !u!4 &2069896718

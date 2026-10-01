@@ -692,6 +692,8 @@ MonoBehaviour:
   Quit: {fileID: 1773217397}
   NamaGame: {fileID: 1908817606}
   SettingButton: {fileID: 1936335497}
+  gameSceneName: lingga-femboy
+  continueButton: {fileID: 0}
   audioSource: {fileID: 829984489}
   clickSound: {fileID: 8300000, guid: caf1c0da1310a474fa8271d7d1d5e5f9, type: 3}
 --- !u!82 &829984489
@@ -1173,8 +1175,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13.2, y: 1}
-  m_SizeDelta: {x: 188.2156, y: 41.6786}
+  m_AnchoredPosition: {x: 4.99897, y: -35.719994}
+  m_SizeDelta: {x: 515.912, y: 96.693}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1403452521
 MonoBehaviour:
@@ -1489,7 +1491,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -182.9565, y: -26.153015}
+  m_AnchoredPosition: {x: -182.95654, y: -26.153076}
   m_SizeDelta: {x: -421.8451, y: -162.1753}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1610508897
@@ -1565,8 +1567,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13.200031, y: -106.277115}
-  m_SizeDelta: {x: 188.2156, y: 41.6786}
+  m_AnchoredPosition: {x: 4.99897, y: -284.59998}
+  m_SizeDelta: {x: 515.912, y: 96.693}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1773217399
 MonoBehaviour:
@@ -1828,8 +1830,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -10, y: 89}
-  m_SizeDelta: {x: -549.005, y: -227.6512}
+  m_AnchoredPosition: {x: 4.9987793, y: 263}
+  m_SizeDelta: {x: -1778.1033, y: -646.6339}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1908817608
 MonoBehaviour:
@@ -1904,8 +1906,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13.200031, y: -53.001}
-  m_SizeDelta: {x: 188.2156, y: 41.6786}
+  m_AnchoredPosition: {x: 5, y: -161}
+  m_SizeDelta: {x: 515.912, y: 96.693}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1936335499
 MonoBehaviour:
